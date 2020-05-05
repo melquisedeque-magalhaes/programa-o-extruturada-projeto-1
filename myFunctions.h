@@ -1,10 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
+
 #include <string.h>
+
 
 #define True 1
 #define False 0
-#define CLEAR "clear"
+#define CLEAR "cls"
 #define MAX 1000
 
 struct Students{
@@ -42,9 +42,10 @@ void header(){
 }
 
 void Menu(){
+	
     header();
-    printf("\nEscolha uma das opÃ§Ãµes Abaixo: \n\n");
-    printf("                            1 -> Mostra UsuÃ¡rios\n");
+    printf("\nEscolha uma das opções Abaixo: \n\n");
+    printf("                            1 -> Mostra Usuários\n");
     printf("                            2 -> Cadastrar Estudante\n");
     printf("                            3 -> Procurar Estudante\n");
     printf("                            4 -> Calcular Media!\n");
@@ -65,7 +66,7 @@ int MenuEntryAndValidationOption(){
         checks = ((option < 0) || (option > 4));
         
         if(checks)
-            printf("\nERROR OPÃ‡ÃƒO INVALIDA TENTE NOVAMENTE!\n");
+            printf("\nERROR OPÇÃO INVALIDA TENTE NOVAMENTE!\n");
     }while(checks);
 
     return option;
@@ -81,21 +82,73 @@ int CreateStudent(int res){
     styles();
     
     students[res].matricula = res;
-
-    printf("Digite o nome do estudante: ");
-    fflush(stdin);
-    fgets(students[res].name, 60, stdin);
+	do{
+		printf("Digite o nome do estudante: ");
+	    fflush(stdin);
+	    fgets(students[res].name, 60, stdin);
+	    
+	     if(strlen(students[res].name) == 0)
+	    	printf("ERROR DIGITE UM NOME VALIDO!\n");
+	    	
+	    
+	    	
+	}while(strlen(students[res].name) == 0);
+    
  
 
     int i = strlen(students[res].name - 1);
 
     if(students[res].name[i] == '\n')
         students[res].name[i] = '\0';
-
+    do{
+    	printf("Digite o dia do seu nascimento: ");
+    	scanf("%d", &students[res].dayBirth);
+    	
+    	if(students[res].dayBirth > 31 || students[res].dayBirth < 0)
+    		printf("ERRO DIGITE UM DATA VALIDA!\n");
+    		
+	}while(students[res].dayBirth > 31 || students[res].dayBirth < 0); 
+	
+	do{
+    	printf("Digite o mês do seu nascimento: ");
+    	scanf("%d", &students[res].monthBirth);
+    	
+    	if(students[res].monthBirth > 31 || students[res].monthBirth < 0)
+    		printf("ERRO DIGITE UM DATA VALIDA!\n");
+    		
+	}while(students[res].monthBirth > 31 || students[res].monthBirth < 0);    
+    
+    do{
+    	printf("Digite o ano do seu nascimento: ");
+    	scanf("%d", &students[res].yearBirth);
+    	
+    	if(students[res].yearBirth < 1900 || students[res].yearBirth > 2020)
+    		printf("ERRO DIGITE UM DATA VALIDA!\n");
+    		
+	}while(students[res].yearBirth < 1900 || students[res].yearBirth > 2020);
+	
+	do{
+		printf("Digite o curso de  interesse: ");
+	    fflush(stdin);
+	    fgets(students[res].course, 60, stdin);
+	    
+	     if(strlen(students[res].course) == 0)
+	    	printf("ERROR DIGITE UM CURSO VALIDO!\n");
+	    	
+	}while(strlen(students[res].course) == 0);
+	
+	
+	printf("Digite o seu email: ");
+    fflush(stdin);
+    fgets(students[res].email, 60, stdin);
+	    		
     styles();
 
     return res++;
 }
+
+
+
 
 // void SeachStudent(){
 
@@ -105,29 +158,29 @@ int CreateStudent(int res){
     
 // }
 
-// int SelectFunctionAccordingMenuOption(int option, int res){
+int SelectFunctionAccordingMenuOption(int option, int res){
 
-//     switch(option){
-//         case 1:
-//             ListeStudents(res);
-//             break;
-//         case 2:
-//             res = CreateStudent(res);
-//             break;
-// //         case 3:
-// //             SeachStudent(id);
-// //             break;
-// //         case 4:
-// //             AverageArithmetic(id);
-// //             break;
-//         default:
-//             res = -1;
-//             printf("\nOBRIGADO VOLTE SEMPRE AO MELQUI ACADEMY!!!\n");
-//             break;
-//     }
-
-//     return res;
-// }
+     switch(option){
+         case 1:
+             ListeStudents(res);
+             break;
+         case 2:
+             res = CreateStudent(res);
+             break;
+/*         case 3:
+             SeachStudent(id);
+             break;
+//         case 4:
+//             AverageArithmetic(id);
+// //             break;*/
+         default:
+             printf("\nOBRIGADO VOLTE SEMPRE AO MELQUI ACADEMY!!!\n");
+             res = -1;
+             break;
+     }
+     
+    return res;
+ }
 
 
 

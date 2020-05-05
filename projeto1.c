@@ -12,25 +12,23 @@
 
 void main(){
 
-   setlocale(LC_ALL, "portuguese");
+   setlocale(LC_ALL, "Portuguese");
+	
+   int res = 0;
 
-    int res = 0;
-
-    while(res == -1){
+    while(res != -1){
 
         Menu();
 
         int option = MenuEntryAndValidationOption();    //  usuário seleciona sua opção
 
-        //res = SelectFunctionAccordingMenuOption(option, res);
-// chama outra opção de acordo com a opção do usuário
+        res = SelectFunctionAccordingMenuOption(option, res); //chama outra opção de acordo com a opção do usuário
 
-        ListeStudents(res);
-        CreateStudent(res);
         ClearWindows();
 
-    }
 
+	
 
-
+	}	
+	system("pause");
 }
